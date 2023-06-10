@@ -2,7 +2,7 @@ from tkinter import Button, Entry
 from canvas import root, frame
 from helpers import clean_screen
 from json import loads, dump
-
+from buying_page import display_products
 
 def render_entry():
     register_button = Button(
@@ -74,7 +74,15 @@ def login():
 
 def logging_in():
     if check_logging_in():
-        pass # TODO: show success message;Display products
+        frame.create_text(
+            470,
+            520,
+            text="Successfully logged in!Ready to buy?",
+            font='Unispace-Bold 18 ',
+            fill='green',
+            tags='error'
+        )
+        display_products()
     else:
         frame.create_text(
             470,
@@ -136,7 +144,7 @@ def registration():
         with open("db/user_info", "a") as users_file:
             dump(info_dict, users_file)
             users_file.write("\n")
-            #TODO: show success message;Display products
+            display_products()
 
 def check_registration(info_dict):
     frame.delete('error')
